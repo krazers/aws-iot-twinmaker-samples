@@ -27,6 +27,13 @@ export const ScenePanel = ({ className }: { className?: ClassName }) => {
   const [sceneLoader] = useSceneLoaderStore();
   const [selectedEntity, setSelectedEntity] = useSelectedStore();
 
+  const externalLibraryConfig = 
+    { 
+      matterport: { 
+        assetBase: '/matterport' 
+      },
+    };
+
   const handleSelectionChange: SelectionChangedEventCallback = useCallback(
     ({ componentTypes, additionalComponentData }) => {
       const { type } = selectedEntity;
@@ -75,7 +82,8 @@ export const ScenePanel = ({ className }: { className?: ClassName }) => {
       setSelectedSceneNodeRef(undefined);
     }
   }, [selectedEntity]);
-
+  
+  
   return (
     <main className={createClassName(styles.root, className)}>
       {sceneLoader && (
@@ -93,6 +101,7 @@ export const ScenePanel = ({ className }: { className?: ClassName }) => {
           sceneLoader={sceneLoader}
           selectedDataBinding={selectedEntity.entityData ?? undefined}
           viewport={VIEWPORT}
+          externalLibraryConfig={externalLibraryConfig}
         />
       )}
     </main>

@@ -3,15 +3,14 @@
 
 export const DEFAULT_QUERY_HOPS = 0;
 
-export const QUERY_ALL_EQUIPMENT_AND_PROCESS_STEPS = `
-  SELECT processStep, r1, e, r2, equipment
+export const QUERY_ALL_ROOMS_AND_FLOORS = `
+  SELECT floor, r1, e, r2, room
   FROM EntityGraph
-  MATCH (cookieLine)<-[:isChildOf]-(processStepParent)<-[:isChildOf]-(processStep)-[r1]-(e)-[r2]-(equipment), equipment.components AS c
-  WHERE cookieLine.entityName = 'COOKIE_LINE'
-  AND processStepParent.entityName = 'PROCESS_STEP'
-  AND c.componentTypeId = 'com.example.cookiefactory.equipment'`;
+  MATCH (building)<-[:isChildOf]-(floor)-[r1]-(e)-[r2]-(room), room.components AS c
+  WHERE building.entityName = 'Seattle - The Summit'
+  AND c.componentTypeId = 'com.amazon.iottwinmaker.parameters'`;
 
-export function createQueryByEquipment(entityId: string, hops = DEFAULT_QUERY_HOPS) {
+export function createQueryByRoom(entityId: string, hops = DEFAULT_QUERY_HOPS) {
   const normalizedHops = Math.max(0, hops);
   let selectString = '';
   let matchString = '';
@@ -22,16 +21,15 @@ export function createQueryByEquipment(entityId: string, hops = DEFAULT_QUERY_HO
   }
 
   return `
-    SELECT processStep${selectString}
+    SELECT floor${selectString}
     FROM EntityGraph
-    MATCH (cookieLine)<-[:isChildOf]-(processStepParent)<-[:isChildOf]-(processStep)${matchString}
-    WHERE cookieLine.entityName = 'COOKIE_LINE'
-    AND processStepParent.entityName = 'PROCESS_STEP'
+    MATCH (building)<-[:isChildOf]-(floor)${matchString}
+    WHERE building.entityName = 'Seattle - The Summit'
     AND r${normalizedHops}.relationshipName != 'isChildOf'
     AND e0.entityId = '${entityId}'`;
 }
 
-export function createQueryByProcessStep(entityId: string, hops = DEFAULT_QUERY_HOPS) {
+export function createQueryByFloor(entityId: string, hops = DEFAULT_QUERY_HOPS) {
   const normalizedHops = Math.max(0, hops);
   let selectString = '';
   let matchString = '';
@@ -42,10 +40,9 @@ export function createQueryByProcessStep(entityId: string, hops = DEFAULT_QUERY_
   }
 
   return `
-    SELECT processStep${selectString}
+    SELECT floor{selectString}
     FROM EntityGraph
-    MATCH (cookieLine)<-[:isChildOf]-(processStepParent)<-[:isChildOf]-(processStep)${matchString}
-    WHERE cookieLine.entityName = 'COOKIE_LINE'
-    AND processStepParent.entityName = 'PROCESS_STEP'
-    AND processStep.entityId = '${entityId}'`;
+    MATCH (building)<-[:isChildOf]-(floor)${matchString}
+    WHERE building.entityName = 'Seattle - The Summit'
+    AND floor.entityId = '${entityId}'`;
 }

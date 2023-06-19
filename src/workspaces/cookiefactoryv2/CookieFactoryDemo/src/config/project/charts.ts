@@ -8,7 +8,8 @@ export const ALARM_COLORS: Record<AlarmState | 'NormalGray', string> = {
   High: '#ff5050',
   Medium: '#ff8e3d',
   Low: '#ddcf3c',
-  Normal: '#7bd45e',
+  //Normal: '#7bd45e',
+  Normal: '#1AA7EC',
   NormalGray: GRAY_COLORS.Gray11,
   Unknown: GRAY_COLORS.Gray30
 };
@@ -16,25 +17,25 @@ export const ALARM_COLORS: Record<AlarmState | 'NormalGray', string> = {
 export const CHART_ALARM_THRESHOLDS: AppKitThreshold<AlarmState>[] = [
   {
     color: ALARM_COLORS.High,
-    label: { text: 'High', show: true },
-    value: 'High',
+    label: { text: 'Busy', show: true },
+    value: 'Busy',
     comparisonOperator: 'EQ'
   },
   {
     color: ALARM_COLORS.Medium,
-    label: { text: 'Medium', show: true },
-    value: 'Medium',
+    label: { text: 'Unknown', show: true },
+    value: 'Unknown',
     comparisonOperator: 'EQ'
   },
   {
     color: ALARM_COLORS.Low,
-    label: { text: 'Low', show: true },
-    value: 'Low',
+    label: { text: 'Almost Available', show: true },
+    value: 'Almost Available',
     comparisonOperator: 'EQ'
   },
   {
-    color: GRAY_COLORS.Gray45,
-    value: 'Normal',
+    color: ALARM_COLORS.Normal,
+    value: 'Available',
     comparisonOperator: 'EQ'
   }
 ];

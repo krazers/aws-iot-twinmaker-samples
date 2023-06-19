@@ -145,7 +145,7 @@ export type TwinMakerQueryNodeData = {
   workspaceId: string;
   description: string;
   components: {
-    componentName: 'CookieLineComponent' | 'ProcessStepComponent';
+    componentName: 'sitewiseBase' | 'relationships';
     componentTypeId: string;
     properties: {
       propertyName: string;
@@ -155,7 +155,7 @@ export type TwinMakerQueryNodeData = {
 };
 
 export type TwinMakerQueryEdgeData = {
-  relationshipName: 'belongTo' | 'feed' | 'flowTo';
+  relationshipName: 'isOn' | 'isIn' ;
   targetEntityId: string;
   sourceComponentName: string;
   sourceEntityId: string;

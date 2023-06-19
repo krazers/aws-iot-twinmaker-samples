@@ -7,4 +7,4 @@ export const REQUEST_SETTINGS: TimeSeriesDataRequestSettings = {
   // See https://awslabs.github.io/iot-app-kit/?path=/docs/react-hooks-usetimeseriesdata--docs#kitchen-sink-example-utilization-with-all-features
 };
 
-export const VIEWPORT: Viewport = { duration: '15m' };
+export const VIEWPORT: Viewport = { duration: '60m' };

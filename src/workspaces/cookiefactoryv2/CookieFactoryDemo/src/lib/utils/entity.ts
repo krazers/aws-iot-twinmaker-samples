@@ -36,7 +36,7 @@ export function createHistoryQueries<T extends SetRequired<EntityData, 'properti
   propertyType: EntityPropertyType
 ): TwinMakerEntityHistoryQuery[] {
   const { componentName, entityId, properties } = entityData;
-
+  
   return properties.reduce<TwinMakerEntityHistoryQuery[]>((accum, { propertyQueryInfo, type }) => {
     if (type === propertyType) {
       accum.push({ componentName, entityId, properties: [propertyQueryInfo] });

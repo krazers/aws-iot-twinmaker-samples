@@ -13,11 +13,12 @@ import { usePanelsStore } from '@/lib/stores/panels';
 import type { StyleSettingsMap } from '@/lib/types';
 import { createHistoryQueries, isEntityWithProperties } from '@/lib/utils/entity';
 
-import '@iot-app-kit/react-components/styles.css';
+//import '@iot-app-kit/react-components/styles.css';
+import '@iot-app-kit/components/styles.css';
 import css from './styles.module.css';
 
-const ALL_COMPONENTS_TEXT = 'Alarm Status: All Equipment';
-const ALARM_STATUS_TEXT = 'Alarm Status';
+const ALL_COMPONENTS_TEXT = 'Room Status: All Rooms';
+const ALARM_STATUS_TEXT = 'Room Status';
 const PROPERTY_DETAIL_TEXT = 'Property Detail';
 
 export function DashboardPanel({ className }: { className?: ClassName; entityId?: string }) {
@@ -77,6 +78,7 @@ export function DashboardPanel({ className }: { className?: ClassName; entityId?
   const lineChartElements = useMemo(() => {
     if (selectedEntity.entityData && isEntityWithProperties(selectedEntity.entityData)) {
       const historyQueries = createHistoryQueries(selectedEntity.entityData, 'data');
+      //const historyQueriesNoTrend = createHistoryQueries(selectedEntity.entityData, 'query');
 
       return historyQueries.map((query) => {
         return (

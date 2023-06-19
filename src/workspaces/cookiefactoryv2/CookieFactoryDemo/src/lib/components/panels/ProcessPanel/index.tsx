@@ -7,8 +7,8 @@ import { useCallback, useEffect, useMemo, useRef } from 'react';
 import {
   ALARM_COLORS,
   COMPONENT_NAMES,
-  QUERY_ALL_EQUIPMENT_AND_PROCESS_STEPS,
-  createQueryByEquipment
+  QUERY_ALL_ROOMS_AND_FLOORS,
+  createQueryByRoom
 } from '@/config/project';
 import { KpiChart } from '@/lib/components/charts';
 import { FitIcon, MinusIcon, PlusIcon, TargetIcon } from '@/lib/components/svgs/icons';
@@ -149,8 +149,8 @@ export function ProcessPanel({ className }: { className?: ClassName }) {
       if (graphRef.current) {
         const knowledgeGraphQuery =
           hops !== -1 && selectedEntityId
-            ? createQueryByEquipment(selectedEntityId, hops)
-            : QUERY_ALL_EQUIPMENT_AND_PROCESS_STEPS;
+            ? createQueryByRoom(selectedEntityId, hops)
+            : QUERY_ALL_ROOMS_AND_FLOORS;
 
         if (knowledgeGraphQuery !== lastKnowledgeGraphQuery.current) {
           const data = await loadData(knowledgeGraphQuery);
